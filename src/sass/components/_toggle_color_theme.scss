@@ -1,0 +1,94 @@
+@mixin animateCtaBg($bg-color-from,
+  $bg-color-to,
+  $position,
+  $animationName) {
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -1px;
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 50%;
+    z-index: 1;
+    animation: 0.2s linear forwards $animationName;
+
+    @keyframes #{$animationName} {
+      from {
+        left: $position;
+        background-color: $bg-color-from;
+      }
+
+      to {
+        left: 0;
+        background-color: $bg-color-to;
+      }
+    }
+  }
+}
+
+@mixin activeCta($bg-color) {
+  &::after {
+    content: "";
+    position: absolute;
+    background-color: $bg-color;
+    left: 0;
+    right: 0;
+    top: -1px;
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 50%;
+    z-index: 1;
+  }
+}
+
+.toggle-color-theme {
+  border: 2px solid yellow;
+  border-radius: 1rem;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.25rem;
+  width: 6rem;
+
+  &__cta {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+
+    &[data-color-theme="light"] {
+      $color: yellow;
+      @include activeCta($color);
+    }
+
+    &[data-color-theme="dark"] {
+      $color: whitesmoke;
+      @include activeCta($color);
+    }
+  }
+
+  .animate-light-theme-cta {
+    $bg-color-from: whitesmoke;
+    $bg-color-to: yellow;
+    $animationName: toggle-bg-light;
+    $position: 3em;
+    @include animateCtaBg($bg-color-from,
+      $bg-color-to,
+      $position,
+      $animationName);
+  }
+
+  .animate-dark-theme-cta {
+    $bg-color-from: yellow;
+    $bg-color-to: whitesmoke;
+    $animationName: toggle-bg-dark;
+    $position: -3em;
+    @include animateCtaBg($bg-color-from,
+      $bg-color-to,
+      $position,
+      $animationName);
+  }
+}

@@ -1,0 +1,26 @@
+@use "./utilities/variables";
+@use "./components/emoticon";
+@use "./components/toggle_color_theme";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  &.theme__light {
+    background-color: whitesmoke;
+  }
+
+  &.theme__dark {
+    background-color: black;
+  }
+}
