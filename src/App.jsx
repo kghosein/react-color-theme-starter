@@ -1,8 +1,9 @@
+import "./sass/main.scss"
 import { useLayoutEffect } from "react"
 import Emoticon from "./components/Emoticon"
 import ToggleColorTheme from "./components/ToggleColorTheme"
 import { useColorThemeContext } from "./hooks/useColorThemeContext"
-import "./sass/main.scss"
+import Header from "./components/Header"
 
 function App() {
   const { dispatch, colorTheme } = useColorThemeContext()
@@ -33,11 +34,18 @@ function App() {
     <div
       className={
         colorTheme === "light" ?
-          "container theme__light" : "container theme__dark"
+          "theme__light app"
+          : colorTheme === "dark" ?
+            "theme__dark app" : null
       }
     >
-      <Emoticon />
-      <ToggleColorTheme />
+      <div
+        className="container"
+      >
+        <Header />
+        <Emoticon />
+        <ToggleColorTheme />
+      </div>
     </div>
   )
 }

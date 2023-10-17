@@ -1,3 +1,5 @@
+@use "../utilities/variables";
+
 @mixin animateCtaBg($bg-color-from,
   $bg-color-to,
   $position,
@@ -43,7 +45,6 @@
 }
 
 .toggle-color-theme {
-  border: 2px solid yellow;
   border-radius: 1rem;
   margin-top: 1rem;
   display: flex;
@@ -51,6 +52,13 @@
   justify-content: space-between;
   padding: 0.25rem;
   width: 6rem;
+
+  $themes: (light: (variables.$border: 2px solid yellow),
+      dark: (variables.$border: 2px solid blue));
+
+  @include variables.themify($themes) {
+    border: variables.themed(variables.$border);
+  }
 
   &__cta {
     border: 0;

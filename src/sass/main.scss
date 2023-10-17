@@ -1,5 +1,4 @@
 @use "./utilities/variables";
-@use "./components/emoticon";
 @use "./components/toggle_color_theme";
 
 * {
@@ -16,11 +15,35 @@
   justify-content: center;
   flex-direction: column;
 
-  &.theme__light {
-    background-color: whitesmoke;
-  }
+  $themes: (light: (variables.$background-color: whitesmoke),
+      dark: (variables.$background-color: black));
 
-  &.theme__dark {
-    background-color: black;
+  @include variables.themify($themes) {
+    background-color: variables.themed(variables.$background-color);
+  }
+}
+
+.emoticon {
+
+  &__el {
+    font-size: 5rem;
+    $themes: (light: (variables.$text-color: black),
+        dark: (variables.$text-color: whitesmoke));
+
+    @include variables.themify($themes) {
+      color: variables.themed(variables.$text-color);
+    }
+  }
+}
+
+.heading {
+  $themes: (light: (variables.$text-color: black,
+        variables.$border: 2px solid purple),
+      dark: (variables.$text-color: whitesmoke,
+        variables.$border: 2px solid red));
+
+  @include variables.themify($themes) {
+    color: variables.themed(variables.$text-color);
+    border-bottom: variables.themed(variables.$border);
   }
 }
